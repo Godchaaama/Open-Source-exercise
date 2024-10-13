@@ -4,10 +4,39 @@ from selenium.webdriver.common.by import By
 import time
 import pandas as pd
 import re
+import sqlite3
 # I.tao dataframe rong va noi chua link
 
 all_links = [] 
-d =pd.DataFrame({'name': [], 'birth': [], 'death': [], 'nationality': []})
+conn = sqlite3.connect("Painters.db")
+c = conn.cursor()
+try:
+    c.execute('''
+        CREATE TABLE Painter (
+            name primary key,
+            birth integer,
+            death integer,
+            nationality text
+        )
+    ''')
+except Exception as e:
+    print(e)
+
+def insert_data(name, year, death, nationality):
+    ck = sqlite3.connect('Musician_db.db')
+    c = ck.cursor()
+    c.execute('''
+        INSERT INTO Painter(name, birth, death, nationality)
+        VALUES (:name, :birth, :death, :nationality)
+    ''',
+      {
+          'name': name,
+          'birth': year,
+          'death': death,
+          'nationality': nationality
+      })
+    ck.commit()
+    ck.close()
 
 # II.lay tat ca duong dan de truy cap den painter
 for i in range(65, 91):
@@ -92,21 +121,7 @@ for link in all_links:
         except:
             nationality = ""
 
-        #tao dictionary thong tin hoa si
-        painter = {'name': name, 'birth': birth, 'death': death, 'nationality': nationality}
-        #chuyen doi dictionary thanh dataframe
-        painter_df = pd.DataFrame([painter])
-        #them thong tin vao df chinh
-        d = pd.concat([d, painter_df], ignore_index=True)
-        #dong web
-        driver.quit()
+        insert_data(name, birth, death, nationality)
     except:
         print("Error!!!!!!!!!!!!!!!")
         
-# IV.In thong tin ra file excel
-print(d)
-#dat ten file excel
-file_name = "Painters.xlsx"
-#saving the excel
-d.to_excel(file_name)
-print('DataFrame is written to Excel File successfully.')
