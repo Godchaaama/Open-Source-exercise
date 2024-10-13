@@ -5,11 +5,22 @@ from selenium.webdriver.chrome.options import Options
 import time
 import pandas as pd
 import re
-
+import sqlite3
 #tạo dataframe rỗng và dictionnary
 all_links = []
 musician_links = []
-df = pd.DataFrame({"name of the band" : [], "years active" :[]})
+
+conn = sqlite3.connect("Musician_db.db")
+c = conn.cursor()
+try:
+    c.execute('''
+        CREATE TABLE Musician (
+            name_of_the_band primary key,
+            years_active integer
+        )
+    ''')
+except Exception as e:
+    print(e)
 
 # Tạo op để chạy chế độ ẩn 
 chrome_options = Options()
@@ -29,7 +40,20 @@ driver.get(url)
 
 #dừng khoảng 2s
 time.sleep(2)
-
+def insert_data(name, year):
+    ck = sqlite3.connect('Musician_db.db')
+    c = ck.cursor()
+    c.execute('''
+        INSERT INTO Musician(name_of_the_band, years_active)
+        VALUES (:name_of_the_band, :years_active)
+    ''',
+      {
+          'name_of_the_band': name,
+          'years_active': year,
+          
+      })
+    ck.commit()
+    ck.close()
 try:
     #lấy tất cả các thẻ ul trong web danh mục
     ul_tags = driver.find_elements(By.TAG_NAME, "ul")
@@ -105,23 +129,7 @@ for link in musician_links:
         except:
             year = ""
 
-        #tạo dictionanty để thêm thông tin nhạc sĩ
-        musician = {'name of the band': name_band, 'years active': year_active}
-        #chuyển đổi dictionary thành dataframe
-        musician_df = pd.DataFrame([musician])
-        #thêm thông tin vào df chính
-        df = pd.concat([df, musician_df], ignore_index=True)
-        #đóng web
-        driver.quit()
+        insert_data(name_band,year_active_element)
     except:
         print("Error!!!!!!!!!!!!!!!")
         
-#in thông tin ra file excel
-print(df)
-
-#đặt tên file excel
-file_name = "musicians.xlsx"
-
-#bỏ thông tin vào file excel
-df.to_excel(file_name)
-print('DataFrame is written to Excel File successfully.')
