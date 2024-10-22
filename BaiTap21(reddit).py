@@ -10,17 +10,6 @@ import time
 import pandas as pd
 import getpass
 
-# Đường dẫn đến file thực thi geckodriver
-gecko_path = r"D:/Open-Source-exercise/geckodriver.exe"
-
-# Khởi tởi đối tượng dịch vụ với đường geckodriver
-ser = Service(gecko_path)
-
-# Tạo tùy chọn
-options = webdriver.chrome.options.Options()
-options.binary_location ="c:\Program Files\Google\Chrome\Application\chrome.exe"
-# Thiết lập firefox(chrome) chỉ hiện thị giao diện
-options.headless = False
 
 # #nhập thông tin người dùng
 my_email = input('Please provide your email: ')

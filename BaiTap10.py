@@ -4,20 +4,7 @@ import time
 from selenium.webdriver.firefox.service import Service
 from selenium.webdriver.common.by import By
 
-#Đường dẫn đến file thực thi geckodriver
-gecko_path = r"D:/Open-Source-exercise/geckodriver.exe"
-
-#Khởi tạo đối tượng dịch vụ với đường geckodriver
-ser = Service(gecko_path)
-
-#Tạo tùy chọn
-options = webdriver.firefox.options.Options()
-options.binary_location = "C:/Program Files/Mozilla Firefox/firefox.exe"
-#thiết lập filefox chỉ hiển thị giao diện 
-options.headless = False
-
-#khởi tạo Driver
-driver = webdriver.Firefox(options= options, service= ser)
+driver = webdriver.Chrome()
 
 #tạo url
 url = 'http://pythonscraping.com/pages/javascript/ajaxDemo.html'

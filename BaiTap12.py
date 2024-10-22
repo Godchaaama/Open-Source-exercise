@@ -9,21 +9,8 @@ from selenium.common.exceptions import NoSuchElementException, TimeoutException
 from selenium.webdriver import ActionChains
 import time
 import pandas as pd
-# Đường dẫn đến file thực thi geckodriver
-gecko_path = r"D:/Open-Source-exercise/geckodriver.exe"
 
-# Khởi tởi đối tượng dịch vụ với đường geckodriver
-ser = Service(gecko_path)
-
-# Tạo tùy chọn
-options = webdriver.firefox.options.Options();
-options.binary_location ="C:/Program Files/Mozilla Firefox/firefox.exe"
-# Thiết lập firefox chỉ hiện thị giao diện
-options.headless = False
-
-# Khởi tạo driver
-driver = webdriver.Firefox(options = options, service=ser)
-
+driver = webdriver.Chrome()
 # Tạo url
 url = 'https://gochek.vn/collections/all'
 

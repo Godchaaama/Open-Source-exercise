@@ -10,18 +10,6 @@ import time
 import pandas as pd
 import getpass
 
-# Đường dẫn đến file thực thi geckodriver
-gecko_path = r"D:/Open-Source-exercise/geckodriver.exe"
-
-# Khởi tởi đối tượng dịch vụ với đường geckodriver
-ser = Service(gecko_path)
-
-# Tạo tùy chọn
-options = webdriver.chrome.options.Options()
-options.binary_location ="c:\Program Files\Google\Chrome\Application\chrome.exe"
-# Thiết lập firefox(chrome) chỉ hiện thị giao diện
-options.headless = False
-
 # Khởi tạo driver
 driver = webdriver.Chrome()
 
@@ -83,7 +71,7 @@ for i in range(2):
     actionChains.key_down(Keys.TAB).perform()
     time.sleep(2)
 
-actionChains.key_down(Keys.Enter).perform()
+actionChains.key_down(Keys.ENTER).perform()
 
 
 time.sleep(15)
