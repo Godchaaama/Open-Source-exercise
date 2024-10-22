@@ -44,8 +44,6 @@ files_collection.delete_one({ 'file_id': 3 })
 for all in files_collection.find({ 'owner': "Nguyen Van A" }):
     print(all)
     
-for max in files_collection.find().sort({ 'size': -1 }).limit(1):
-    print(max)
 
 fmax = files_collection.count_documents({ 'size': {'$lt': 1000 } })
 print(fmax)

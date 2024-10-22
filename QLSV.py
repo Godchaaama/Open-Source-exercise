@@ -7,22 +7,22 @@ root = Tk()
 root.title("Hệ thống quản lý sinh viên")
 root.geometry("1200x800")
 
-# Kết nối tới db
-conn = sqlite3.connect('Student_book.db')
-c = conn.cursor()
+# # Kết nối tới db
+# conn = sqlite3.connect('Student_book.db')
+# c = conn.cursor()
 
-#Tao bang de luu tru
-c.execute('''
-    CREATE TABLE students(
-        id INTEGER PRIMARY KEY AUTOINCREMENT,
-        first_name text,
-        last_name text,
-        class_id text,
-        yearEnrolled interger,
-        average_score interger
-    )
-'''
-)
+# #Tao bang de luu tru
+# c.execute('''
+#     CREATE TABLE students(
+#         id INTEGER PRIMARY KEY AUTOINCREMENT,
+#         first_name text,
+#         last_name text,
+#         class_id text,
+#         yearEnrolled interger,
+#         average_score interger
+#     )
+# '''
+# )
 
 def them():
     # Kết nối và lấy dữ liệu
