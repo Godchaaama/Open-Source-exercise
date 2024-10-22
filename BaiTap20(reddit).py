@@ -77,7 +77,7 @@ for i in range(14):
 actionChains.send_keys('Vi du post').perform()
 
 actionChains.key_down(Keys.TAB).perform()
-actionChains.send_keys('Truong Minh Khoa').perform()
+actionChains.send_keys('Ho Gia Thanh').perform()
 
 for i in range(2):
     actionChains.key_down(Keys.TAB).perform()

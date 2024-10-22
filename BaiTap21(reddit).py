@@ -64,7 +64,7 @@ time.sleep(10)
 
 
 # Truy cap trang post bai
-url2 = 'https://www.reddit.com/user/khoajakilevi/submit/?type=TEXT'
+url2 = 'https://www.reddit.com/user/Nice-Eggplant-6800/submit/?type=TEXT'
 driver.get(url2)
 time.sleep(2)
 
@@ -72,13 +72,13 @@ for i in range(17):
     actionChains.key_down(Keys.TAB).perform()
 
 
-actionChains.send_keys('Vi du post cua khoa').perform()
+actionChains.send_keys('VD thanh').perform()
 
 
 actionChains.key_down(Keys.TAB)
 actionChains.key_down(Keys.TAB).perform()
 
-actionChains.send_keys('Truong Minh Khoa').perform()
+actionChains.send_keys('Ho Gia Thanh').perform()
 
 for i in range(2):
     actionChains.key_down(Keys.TAB).perform()
