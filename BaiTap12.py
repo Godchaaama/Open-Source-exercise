@@ -10,7 +10,10 @@ from selenium.webdriver import ActionChains
 import time
 import pandas as pd
 
+
+# Khởi tạo driver
 driver = webdriver.Chrome()
+
 # Tạo url
 url = 'https://gochek.vn/collections/all'
 
@@ -24,21 +27,6 @@ time.sleep(1)
 body = driver.find_element(By.TAG_NAME, "body")
 time.sleep(3)
 
-# for k in range (40):
-#     try:
-#         # Lấy tất cả các button trên trang
-#        buttons = driver.find_elements(By.TAG_NAME, "button")
-
-#        # Duyệt qua từng button
-#        for button in buttons:
-#            # Kiểm tra nếu nội dung của button chứa "Xem thêm" và "sản phẩm"
-#            if "Xem thêm" in button.text and "sản phẩm" in button.text:
-#                # Di chuyển tới button và click
-#                button.click()
-#                break  # Thoát khỏi vòng lặp nếu đã click thành công
-    
-#     except Exception as e:
-#         print(f"Lỗi: {e}")
 
 # Nhấn phím mũi tên xuống nhiều lần để cuộn xuống từ từ
 for i in range(50):  # Lặp 30 lần, mỗi lần cuộn xuống một ít
@@ -55,7 +43,7 @@ gia_ban = []
 hinh_anh = []
 
 # # Tìm tất cả các sp 
-spgo = driver.find_elements(By.XPATH, '.product-block.product-resize.site-animation.fixheight')
+spgo = driver.find_elements(By.XPATH, "//div[contains(@class,'product-block')]")
 
 print(len(spgo))
 
@@ -76,9 +64,12 @@ for i, goc in enumerate(spgo, 1):
     
     # Lat gia sp
     try:
-        gsp = sp.find_element(By.CLASS_NAME, 'box-pro-prices').text
+        gsp = sp.find_element(By.CLASS_NAME, "pro-price.highlight").text
+        gsp1 = [el.text for el in gsp.find_elements(By.XPATH, ".//*[not(contains(@class, 'pro-price-del'))]")]
+        gsp = " ".join(gsp1)
     except:
-        gsp=''
+        gsp = sp.find_element(By.CLASS_NAME, "box-pro-prices").text
+
     
     # Lat hinh anh
     try:
@@ -101,5 +92,3 @@ df=pd.DataFrame({
     "Hình ảnh":hinh_anh
     
 })
-
-df.to_excel('danh_sach_sp.xlsx', index=False)
