@@ -1,4 +1,3 @@
-from pygments.formatters.html import webify
 from selenium import webdriver
 from selenium.webdriver.common.by import By
 import time
@@ -69,7 +68,6 @@ for product in products:
 
     except:
         org_pr = org_price.split()
-        global true_org_prc
         true_org_prc = org_pr[0]
         dis_price = "NULL"
         #them vao database
