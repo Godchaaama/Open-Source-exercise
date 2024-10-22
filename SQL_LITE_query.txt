@@ -1,0 +1,87 @@
+--cau 3
+
+--a
+CREATE TABLE student (
+student_id INTEGER PRIMARY KEY,
+Name TEXT,
+Surname TEXT,
+Dob TEXT,
+year_enroll INTEGER
+);
+
+--b 
+CREATE TABLE course (
+course_id INTEGER PRIMARY KEY
+NOT NULL,
+name TEXT,
+creditPoints INTEGER,
+yearCommenced INTEGER
+);
+
+--c
+CREATE TABLE staff (
+emplhoyee_id INTEGER PRIMARY KEY
+NOT NULL,
+name TEXT,
+surname TEXT,
+jobTitle TEXT
+);
+
+--d
+CREATE TABLE program (
+program_id INTEGER PRIMARY KEY
+NOT NULL,
+name TEXT,
+creditPoints INTEGER,
+yearCommenced INTEGER
+);
+
+--cau 4
+
+INSERT INTO student (student_id, name, surname, dateOfBirth, yearEnrolled) VALUES(1, 'Nguyễn', 'Văn A', '1999-03-15', 2017),(2, 'Trần', 'Thị B', '2000-11-25', 2018),(3, 'Lê', 'Minh C', '1998-07-10', 2016),(4, 'Phạm', 'Quốc D', '2001-02-20', 2019),(5, 'Đỗ', 'Thị E', '1997-05-22', 2015),(6, 'Vũ', 'Văn F', '2000-09-12', 2018),(7, 'Bùi', 'Thị G', '1999-04-30', 2017),(8, 'Hoàng', 'Văn H', '1998-06-05', 2016),(9, 'Phan', 'Thị I', '2001-12-01', 2019),(10, 'Đinh', 'Văn J', '2000-08-14', 2018);
+
+INSERT INTO course (course_id, name, creditPoints, yearCommenced) VALUES(101, 'Toán học', 3, 2015),(102, 'Vật lý', 4, 2016),(103, 'Hóa học', 3, 2017),(104, 'Sinh học', 4, 2018),(105, 'Khoa học máy tính', 6, 2015),(106, 'Kinh tế học', 3, 2016),(107, 'Tâm lý học', 4, 2017),(108, 'Kỹ thuật', 5, 2018),(109, 'Lịch sử', 3, 2015),(110, 'Ngôn ngữ Anh', 3, 2016);
+
+INSERT INTO staff (course_id, name, surname, jobTitle) VALUES(101, 'Nguyễn', 'Anh', 'Giáo sư'),(102, 'Trần', 'Bình', 'Phó Giáo sư'),(103, 'Lê', 'Chiến', 'Giảng viên'),(104, 'Phạm', 'Dũng', 'Giảng viên chính'),(105, 'Đỗ', 'Hoàng', 'Giáo sư'),(106, 'Vũ', 'Kiên', 'Giảng viên'),(107, 'Bùi', 'Lan', 'Trợ lý Giáo sư'),(108, 'Hoàng', 'Mạnh', 'Giáo sư'),(109, 'Phan', 'Ngọc', 'Giảng viên chính'),(110, 'Đinh', 'Phong', 'Phó Giáo sư');
+
+INSERT INTO program (program_id, program_id, name, creditPoints, yearCommenced) VALUES(101, 201, 'Chương trình Toán học', 120, 2015),(102, 202, 'Chương trình Vật lý', 130, 2016),(103, 203, 'Chương trình Hóa học', 125, 2017),(104, 204, 'Chương trình Sinh học', 135, 2018),(105, 205, 'Chương trình Khoa học máy tính', 150, 2015),(106, 206, 'Chương trình Kinh tế học', 120, 2016),(107, 207, 'Chương trình Tâm lý học', 130, 2017),(108, 208, 'Chương trình Kỹ thuật', 140, 2018),(109, 209, 'Chương trình Lịch sử', 125, 2015),(110, 210, 'Chương trình Ngôn ngữ Anh', 120, 2016);
+
+--Cau 5
+select*from student
+where name Like 'H%'
+
+--cau 6
+select name, surname, yearEnrolled
+from Student
+where STRFTIME('%Y', 'now') - yearEnrolled >= 4;
+
+--cau 7
+select name, creditPoints
+from course
+order by creditPoints desc;
+
+--cau 8
+UPDATE Student
+SET name = ('Adam')
+WHERE Student_id = (SELECT MIN(Student_id) FROM Student);
+
+--cau 9
+UPDATE course
+SET name = UPPER(name)
+
+--cau 10
+DELETE FROM Student
+WHERE dateOfBirth = (
+    SELECT dateOfBirth
+    FROM Student
+    ORDER BY dateOfBirth ASC
+    LIMIT 1
+);
+
+--cau 11
+ALTER TABLE course
+DROP COLUMN yearCommenced;
+
+--cau 12
+ALTER TABLE staff
+RENAME TO employee;
